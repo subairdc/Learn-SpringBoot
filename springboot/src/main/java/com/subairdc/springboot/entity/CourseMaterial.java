@@ -1,5 +1,7 @@
 package com.subairdc.springboot.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString(exclude = "course") //its an another entity
-public class CourseMaterial {
+public class CourseMaterial implements Serializable{
 
     @Id
     @SequenceGenerator(
@@ -39,12 +41,12 @@ public class CourseMaterial {
     //LAZY type get data from DB only specific queries
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            optional = false
+            fetch = FetchType.EAGER
+//            optional = false
     ) //optional false means can't add courseMaterial alone (without course)
     @JoinColumn(
             name = "course_id",
             referencedColumnName = "courseId"
-    ) //add courseId column in course material
+    ) //add courseId column in course material table
     private Course course;
 }

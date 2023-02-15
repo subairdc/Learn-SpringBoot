@@ -6,4 +6,6 @@ import com.subairdc.springboot.entity.CourseMaterial;
 
 public interface CourseMaterialRepository extends JpaRepository<CourseMaterial, Long>{
 
+	String save(String courseMaterial);
+
 }

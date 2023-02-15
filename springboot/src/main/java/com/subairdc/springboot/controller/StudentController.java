@@ -2,6 +2,7 @@ package com.subairdc.springboot.controller;
 
 import java.util.List;
 
+import org.hibernate.annotations.Parameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,61 +32,127 @@ public class StudentController {
     public String addStudent() {
         return "Hello World";
     }
-
-	// Add new student
+ 
     @PostMapping("/addStudent")
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
-    }
+	public Student addStudent(@RequestBody Student student) {
+		return studentService.addStudent(student);
+	}
     
     // Add more than 1 student
-    @PostMapping("/addStudents")
-    public List<Student> addAllStudents(@RequestBody List<Student> students) {
-        return studentService.addAllStudents(students);
-    }
-
-    // Get student by Id
-    @GetMapping("/getStudentById/{id}")
-    public Student getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
-    }
-
-    // Get student by first name
-    @GetMapping("/getStudentByFirstName/{name}")
-    public  List<Student> getStudentByFirstName(@PathVariable String name) {
-        return  studentService.getStudentByFirstName(name);
+	@PostMapping("/addStudents")
+	public List<Student> addStudents(@RequestBody List<Student> students) {
+		return studentService.addStudents(students);
+	}
+    
+	//Get student by Id
+	@GetMapping("/getStudentById/{id}")
+	public Student getStudentById(@PathVariable Long id) {
+		return studentService.getStudentById(id);
+	}
+	
+    @GetMapping("/getAllStudents")
+	public List<Student> getAllstudents() {
+		return studentService.getAllStudents();
+	}
+    
+    @PutMapping("/updateStudent/{id}")
+    public Student upadteStudent(@PathVariable Long id,@RequestBody Student student) {
+    	return studentService.updateStudent(id,student);
     }
     
+    //Get student by first name
+    @GetMapping("/getStudentByFirstName/{name}")
+    public  Student getStudentByFirstName(@PathVariable String name) {
+    	return  studentService.getStudentByFirstName(name);
+    }
+  
     // Get student by last name
     @GetMapping("/getStudentByLastName/{name}")
-    public  List<Student> getStudentByLastName(@PathVariable String name) {
-        return  studentService.getStudentByLastName(name);
+    public  Student getStudentByLastName(@PathVariable String name) {
+    	return  studentService.getStudentByLastName(name);
     }
-    
+  
     // Get student by email Id
     @GetMapping("/getStudentByEmailId/{emailId}")
     public  Student getStudentByEmailId(@PathVariable String emailId) {
-        return  studentService.getStudentByEmailId(emailId);
+    	return  studentService.getStudentByEmailId(emailId);
     }
     
-    // Update student
-    @PutMapping("/updateStudent/{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return studentService.updateStudent(id,student);
-    }
-
-    // Delete student
+    //Delete student
     @DeleteMapping("/deleteStudentById/{id}")
-    public boolean deleteStudentById(@PathVariable Long id) {
-        return studentService.deleteStudentById(id);
+	public boolean deleteStudentById(@PathVariable Long id) {
+	    return studentService.deleteStudentById(id);
+	}
+    
+ // Get student first name by email Id
+    @GetMapping("/getStudentFirstNameByEmailAddress/{emailId}")
+    public  String getStudentFirstNameByEmailAddress(@PathVariable String emailId) {
+    	return  studentService.getStudentFirstNameByEmailAddress(emailId);
     }
-
-    // Get all student
-    @GetMapping("/getAllStudents")
-    public List<Student> getAllStudents() {
-    	LOGGER.info("get Student Data");
-        return studentService.getAllStudents();
-    }
+    
+//  //Get student by Id
+//  	@GetMapping("/getStudentCourse/{id}")
+//  	public String getStudentCourse(@PathVariable Long id) {
+//  		return studentService.getStudentCourse(id);
+//  	}
+//    
+    
+    
+//	for test case
+//	// Add new student
+//    @PostMapping("/addStudent")
+//    public Student addStudent(@RequestBody Student student) {
+//        return studentService.addStudent(student);
+//    }
+//    
+//    // Add more than 1 student
+//    @PostMapping("/addStudents")
+//    public List<Student> addAllStudents(@RequestBody List<Student> students) {
+//        return studentService.addAllStudents(students);
+//    }
+//
+//    // Get student by Id
+//    @GetMapping("/getStudentById/{id}")
+//    public Student getStudentById(@PathVariable Long id) {
+//        return studentService.getStudentById(id);
+//    }
+//
+//    // Get student by first name
+//    @GetMapping("/getStudentByFirstName/{name}")
+//    public  List<Student> getStudentByFirstName(@PathVariable String name) {
+//        return  studentService.getStudentByFirstName(name);
+//    }
+//    
+//    // Get student by last name
+//    @GetMapping("/getStudentByLastName/{name}")
+//    public  List<Student> getStudentByLastName(@PathVariable String name) {
+//        return  studentService.getStudentByLastName(name);
+//    }
+//    
+//    // Get student by email Id
+//    @GetMapping("/getStudentByEmailId/{emailId}")
+//    public  Student getStudentByEmailId(@PathVariable String emailId) {
+//        return  studentService.getStudentByEmailId(emailId);
+//    }
+//    
+//    // Update student
+//    @PutMapping("/updateStudent/{id}")
+//    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
+//        return studentService.updateStudent(id,student);
+//    }
+//
+//    // Delete student
+//    @DeleteMapping("/deleteStudentById/{id}")
+//    public boolean deleteStudentById(@PathVariable Long id) {
+//        return studentService.deleteStudentById(id);
+//    }
+//
+//    // Get all student
+//    @GetMapping("/getAllStudents")
+//    public List<Student> getAllStudents() {
+//    	LOGGER.info("get Student Data");
+//        return studentService.getAllStudents();
+//    }
     
     
 }

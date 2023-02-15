@@ -1,7 +1,15 @@
 package com.subairdc.springboot.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,7 +32,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Course {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "courseId")
+public class Course implements Serializable{
 
     @Id
     @SequenceGenerator(
@@ -41,6 +50,7 @@ public class Course {
     private Integer credit;
 
     @OneToOne(
+    		cascade = CascadeType.ALL,
             mappedBy = "course"
     )//Bidirectional Mapping
     private CourseMaterial courseMaterial;
@@ -52,6 +62,8 @@ public class Course {
             name = "teacher_id",
             referencedColumnName = "teacherId"
     )
+//    @JsonIgnore
+//    @JsonBackReference
     private Teacher teacher;
 
     @ManyToMany(

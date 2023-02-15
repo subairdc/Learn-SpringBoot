@@ -46,7 +46,7 @@ public class Student {
 	
 	@Length(min = 3, max =15)
 	private String firstName;
-	@Length(min = 3, max =15)
+	@Length(min = 1, max =15)
 	private String lastName;
 	
 	@Column(name = "email_address",
@@ -57,6 +57,6 @@ public class Student {
 	private String emailId;
 	
 	@Embedded
-	private Guardian guardian;
+	Guardian guardian;
 }
 

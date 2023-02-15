@@ -13,45 +13,69 @@ import com.subairdc.springboot.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long>{
 
-	List<Student> findByFirstName(String name);
+	Optional<Student> findByFirstName(String name);
 
-	List<Student> findByLastName(String name);
+	Optional<Student> findByLastName(String name);
 
 	Optional<Student> findByEmailId(String emailId);
 
-	List<Student> findByFirstNameContaining(String string);
+	
+	@Query("select s.firstName from Student s where s.emailId = ?1")
+	String getStudentFirstNameByEmailAddress(String emailId);
 
-	List<Student> findByGuardianName(String string);
+//	@Query("select s.studentId, s.firstName, s.lastName, c.title from Student s inner join course c on s.studentId = ?1  = c.studentId=?1")
+//	String getStudentCourse(Long id);
+
 	
 	
-	//JPQL
-    @Query("select s from Student s where s.emailId = ?1")
-    Student getStudentByEmailAddress(String emailId);
-
-    //JPQL
-    @Query("select s.firstName from Student s where s.emailId = ?1")
-    String getStudentFirstNameByEmailAddress(String emailId);
-
-    //Native
-    @Query(value = "SELECT * FROM tbl_student s where s.email_address = ?1",
-            nativeQuery = true
-    )
-    Student getStudentByEmailAddressNative(String emailId);
-
-
-    //Native Named Param
-    @Query(value = "SELECT * FROM tbl_student s where s.email_address = :emailId",
-            nativeQuery = true
-    )
-    Student getStudentByEmailAddressNativeNamedParam(
-            @Param("emailId") String emailId
-    );
-
-    @Modifying
-    @Transactional
-    @Query(value = "update tbl_student set first_name = ?1 where email_address = ?2",
-            nativeQuery = true
-    )
-    int updateStudentNameByEmailId(String firstName, String emailId);
+	
+	
+	
+	
+	
+	
+	
+	
+//	For Test cases
+//	List<Student> findByFirstName(String name);
+//
+//	List<Student> findByLastName(String name);
+//
+//	Optional<Student> findByEmailId(String emailId);
+//
+//	List<Student> findByFirstNameContaining(String string);
+//
+//	List<Student> findByGuardianName(String string);
+//	
+//	
+//	//JPQL
+//    @Query("select s from Student s where s.emailId = ?1")
+//    Student getStudentByEmailAddress(String emailId);
+//
+//    //JPQL
+//    @Query("select s.firstName from Student s where s.emailId = ?1")
+//    String getStudentFirstNameByEmailAddress(String emailId);
+//
+//    //Native
+//    @Query(value = "SELECT * FROM tbl_student s where s.email_address = ?1",
+//            nativeQuery = true
+//    )
+//    Student getStudentByEmailAddressNative(String emailId);
+//
+//
+//    //Native Named Param
+//    @Query(value = "SELECT * FROM tbl_student s where s.email_address = :emailId",
+//            nativeQuery = true
+//    )
+//    Student getStudentByEmailAddressNativeNamedParam(
+//            @Param("emailId") String emailId
+//    );
+//
+//    @Modifying
+//    @Transactional
+//    @Query(value = "update tbl_student set first_name = ?1 where email_address = ?2",
+//            nativeQuery = true
+//    )
+//    int updateStudentNameByEmailId(String firstName, String emailId);
 
 }

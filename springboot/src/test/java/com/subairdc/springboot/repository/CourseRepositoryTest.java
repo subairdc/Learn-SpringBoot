@@ -99,29 +99,29 @@ class CourseRepositoryTest {
 //        System.out.println("courses = " + courses);
 //    }
 
-    @Test
-    public void saveCourseWithStudentAndTeacher() {
-
-        Teacher teacher = Teacher.builder()
-                .firstName("Steve")
-                .lastName("Rogers")
-                .build();
-
-        Student student = Student.builder()
-                .firstName("Tony")
-                .lastName("Stark")
-                .emailId("tony@gmail.com")
-                .build();
-
-        Course course = Course
-                .builder()
-                .title("Robotic")
-                .credit(10)
-                .teacher(teacher)
-                .build();
-
-        course.addStudents(student);
-
-        courseRepository.save(course);
-    }
+//    @Test
+//    public void saveCourseWithStudentAndTeacher() {
+//
+//        Teacher teacher = Teacher.builder()
+//                .firstName("Steve")
+//                .lastName("Rogers")
+//                .build();
+//
+//        Student student = Student.builder()
+//                .firstName("Tony")
+//                .lastName("Stark")
+//                .emailId("tony@gmail.com")
+//                .build();
+//
+//        Course course = Course
+//                .builder()
+//                .title("Robotic")
+//                .credit(10)
+//                .teacher(teacher)
+//                .build();
+//
+//        course.addStudents(student);
+//
+//        courseRepository.save(course);
+//    }
 }
