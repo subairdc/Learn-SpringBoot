@@ -1,15 +1,18 @@
 package com.subairdc.springboot.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Guardian;
 import com.subairdc.springboot.entity.Student;
+import com.subairdc.springboot.repository.CourseRepository;
 import com.subairdc.springboot.repository.StudentRepository;
 
 @Service
@@ -17,6 +20,9 @@ public class StudentServiceImpl implements StudentService{
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 	
 //	JSON Object
 //	@Override
@@ -125,17 +131,50 @@ public class StudentServiceImpl implements StudentService{
 		return false;
 	}
 
+	
+	
+//For HQL	
+	
 	@Override
-	public String getStudentFirstNameByEmailAddress(String emailId) {
+	public String getStudentFirstNameByEmailId(String emailId) {
 		
-		return studentRepository.getStudentFirstNameByEmailAddress(emailId);
+		return studentRepository.getStudentFirstNameByEmailId(emailId);
 	}
-//
-//	@Override
-//	public String getStudentCourse(Long id) {
-//		
-//		return studentRepository.getStudentCourse(id);
-//	}
+	
+	
+	@Override
+	public List<Course> getCourseByStudentId(Long id) {
+		
+		return studentRepository.getCourseByStudentId(id);
+	}
+
+	@Override
+	public String getStuCourseDetailsByStudentId(Long id) {
+		
+		return studentRepository.getStuCourseDetailsByStudentId(id);
+	}
+
+	@Override
+	public List<Object[]> getCourseMaterialByStudentId(Long id) {
+		
+		return studentRepository.getCourseMaterialByStudentId(id);
+	}
+
+	@Override
+	public Student addCourseToStudent(Long studentId, Long courseId) {
+		// First, retrieve the student and the course from the database
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
+
+        // Then, add the course to the student's collection of courses
+        student.getCourses().add(course);
+
+        // Finally, save the updated student object back to the database
+        studentRepository.save(student);
+		return student;
+	}
 	
 	
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Student;
 import com.subairdc.springboot.service.StudentService;
 
@@ -84,18 +85,39 @@ public class StudentController {
 	    return studentService.deleteStudentById(id);
 	}
     
- // Get student first name by email Id
-    @GetMapping("/getStudentFirstNameByEmailAddress/{emailId}")
-    public  String getStudentFirstNameByEmailAddress(@PathVariable String emailId) {
-    	return  studentService.getStudentFirstNameByEmailAddress(emailId);
+//Associate Mapping
+    @PutMapping("/{studentId}/courses/{courseId}")
+    public Student addCourseToStudent(@PathVariable Long studentId, @PathVariable Long courseId) {
+    	return studentService.addCourseToStudent(studentId,courseId);
     }
     
-//  //Get student by Id
-//  	@GetMapping("/getStudentCourse/{id}")
-//  	public String getStudentCourse(@PathVariable Long id) {
-//  		return studentService.getStudentCourse(id);
-//  	}
-//    
+    
+//For HQL
+    
+ // Get student first name by email Id
+    @GetMapping("/getStudentFirstNameByEmailId/{emailId}")
+    public  String getStudentFirstNameByEmailId(@PathVariable String emailId) {
+    	return  studentService.getStudentFirstNameByEmailId(emailId);
+    }
+    
+  //Get Course by Student Id
+  	@GetMapping("/getCourseByStudentId/{id}")
+  	public List<Course> getCourseByStudentId(@PathVariable Long id) {
+  		return studentService.getCourseByStudentId(id);
+  	}
+  	
+  	 //Get Course Details by Student Id
+  	@GetMapping("/getStuCourseDetailsByStudentId/{id}")
+  	public String getStuCourseDetailsByStudentId(@PathVariable Long id) {
+  		return studentService.getStuCourseDetailsByStudentId(id);
+  	}
+  	
+  	 //Get Course Details by Student Id
+  	@GetMapping("/getCourseMaterialByStudentId/{id}")
+  	public List<Object[]> getCourseMaterialByStudentId(@PathVariable Long id) {
+  		return studentService.getCourseMaterialByStudentId(id);
+  	}
+    
     
     
 //	for test case

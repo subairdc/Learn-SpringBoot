@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long>{
@@ -21,13 +22,16 @@ public interface StudentRepository extends JpaRepository<Student, Long>{
 
 	
 	@Query("select s.firstName from Student s where s.emailId = ?1")
-	String getStudentFirstNameByEmailAddress(String emailId);
+	String getStudentFirstNameByEmailId(String emailId);
 
-//	@Query("select s.studentId, s.firstName, s.lastName, c.title from Student s inner join course c on s.studentId = ?1  = c.studentId=?1")
-//	String getStudentCourse(Long id);
+	@Query("SELECT c FROM Course c JOIN c.students s WHERE s.id = :studentId")
+	List<Course> getCourseByStudentId(@Param("studentId") Long id);
 
-	
-	
+	@Query("SELECT s.id, s.firstName, c.id, c.title FROM Student s JOIN s.courses c WHERE s.id = :studentId")
+	String getStuCourseDetailsByStudentId(@Param("studentId") Long id);
+
+    @Query("SELECT s.id, s.lastName, c.id, c.title, cm.url FROM Student s JOIN s.courses c JOIN c.courseMaterial cm WHERE s.id = :studentId")
+    List<Object[]> getCourseMaterialByStudentId(@Param("studentId") Long id);
 	
 	
 	

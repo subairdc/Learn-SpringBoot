@@ -110,5 +110,24 @@ public class CourseServiceImpl implements CourseService{
 	public Course addCourseWithStudentTeacherAndMaterial(Course course) {
 		return  courseRepository.save(course);
 	}
+	
+	//Associate Mapping
+
+	@Override
+	public Course addTeacherToCourse(Long courseId, Long teacherId) {
+		Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+     Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+     course.setTeacher(teacher);
+
+     Course savedCourse = courseRepository.save(course);
+		return savedCourse;
+	}
+	
+
+	
 
 }

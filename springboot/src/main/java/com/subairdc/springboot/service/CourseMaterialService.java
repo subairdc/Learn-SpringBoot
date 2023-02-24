@@ -12,4 +12,6 @@ public interface CourseMaterialService {
 
 	List<CourseMaterial> getAllCourseMaterials();
 
+	CourseMaterial addCourseMaterialExistingCourse(Long courseId, CourseMaterial courseMaterial);
+
 }

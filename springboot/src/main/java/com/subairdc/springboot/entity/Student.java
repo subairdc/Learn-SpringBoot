@@ -1,5 +1,7 @@
 package com.subairdc.springboot.entity;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Column;
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -58,5 +61,8 @@ public class Student {
 	
 	@Embedded
 	Guardian guardian;
+	
+	@ManyToMany(mappedBy = "students")
+	private List<Course> courses;
 }
 

@@ -2,6 +2,7 @@ package com.subairdc.springboot.service;
 
 import java.util.List;
 
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Student;
 
 public interface StudentService {
@@ -24,9 +25,21 @@ public interface StudentService {
 
 	boolean deleteStudentById(Long id);
 
-	String getStudentFirstNameByEmailAddress(String emailId);
+//Associate Mapping
+	
+	Student addCourseToStudent(Long studentId, Long courseId);	
 
-//	String getStudentCourse(Long id);	
+	
+//For HQL	
+	
+	String getStudentFirstNameByEmailId(String emailId);
+
+	List<Course> getCourseByStudentId(Long id);
+
+	String getStuCourseDetailsByStudentId(Long id);
+
+	List<Object[]> getCourseMaterialByStudentId(Long id);
+
 
 
 	

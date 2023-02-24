@@ -41,7 +41,7 @@ public class CourseMaterial implements Serializable{
     //LAZY type get data from DB only specific queries
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
 //            optional = false
     ) //optional false means can't add courseMaterial alone (without course)
     @JoinColumn(

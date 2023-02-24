@@ -6,9 +6,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.subairdc.springboot.entity.Guardian;
-import com.subairdc.springboot.entity.Student;
-import com.subairdc.springboot.entity.Teacher;
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Teacher;
 import com.subairdc.springboot.repository.TeacherRepository;
 
@@ -89,5 +87,34 @@ public class TeacherServiceImpl implements TeacherService{
 	 		teacherRepository.save(existingUser);
 	     }
 		return existingUser;
+	}
+	
+//For HQL
+
+	@Override
+	public String getCourseDetailsByTeacherId(Long id) {
+		return teacherRepository.getCourseDetailsByTeacherId(id);
+	}
+
+	@Override
+	public List<Object[]> getCourseMaterialByTeacherId(Long id) {
+		
+		 Teacher teacher = teacherRepository.findById(id)
+	                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+	        List<Course> courses = teacher.getCourses();
+		
+		return teacherRepository.getCourseMaterialByTeacherId(id);
+	}
+	
+	@Override
+	public List<Course> getCourseMaterialsByTeacherId(Long id) {
+		
+		 Teacher teacher = teacherRepository.findById(id)
+	                .orElseThrow(() -> new RuntimeException("Teacher not found"));
+
+	        List<Course> courses = teacher.getCourses();
+		
+		return courses;
 	}
 }

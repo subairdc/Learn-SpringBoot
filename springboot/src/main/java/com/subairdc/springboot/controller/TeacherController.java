@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.subairdc.springboot.entity.Course;
 import com.subairdc.springboot.entity.Teacher;
 import com.subairdc.springboot.service.TeacherService;
 
@@ -74,5 +75,24 @@ public class TeacherController {
 	public boolean deleteTeacherById(@PathVariable Long id) {
 	    return teacherService.deleteTeacherById(id);
 	}
+    
+//For HQL
+    //Get Course Details by Teacher Id
+  	@GetMapping("/getCourseDetailsByTeacherId/{id}")
+  	public String getCourseDetailsByTeacherId(@PathVariable Long id) {
+  		return teacherService.getCourseDetailsByTeacherId(id);
+  	}
+  	
+  //Get Course Details by Student Id
+  	@GetMapping("/getCourseMaterialByTeacherId/{id}")
+  	public List<Object[]> getCourseMaterialByTeacherId(@PathVariable Long id) {
+  		return teacherService.getCourseMaterialByTeacherId(id);
+  	}
+  	
+  //Get Course Details by Student Id
+  	@GetMapping("/getCourseMaterialsByTeacherId/{id}")
+  	public List<Course> getCourseMaterialsByTeacherId(@PathVariable Long id) {
+  		return teacherService.getCourseMaterialsByTeacherId(id);
+  	}
   
 }

@@ -21,6 +21,10 @@ public interface CourseService {
 	Course addCourseWithStudentAndTeacher(Course course);
 	
 	Course addCourseWithStudentTeacherAndMaterial(Course course);
+	
+//Associate Mapping
+
+	Course addTeacherToCourse(Long courseId, Long teacherId);
 
 
 }
