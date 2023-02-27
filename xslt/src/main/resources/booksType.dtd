@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT books (book+)>
+<!ELEMENT book (bookName,authorName,publisher,price,edition)>
+<!ELEMENT bookName (#PCDATA)>
+<!ELEMENT authorName (#PCDATA)>
+<!ELEMENT publisher (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT edition (#PCDATA)>
+<!ATTLIST book id ID #REQUIRED>
+<!ATTLIST book lang (English|Tamil) "English">

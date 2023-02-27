@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.subairdc.org/booksSchema"
+	xmlns:tns="http://www.subairdc.org/booksSchema"
+	elementFormDefault="qualified">
+
+	<complexType name="bookstype">
+		<sequence>
+			<element name="book" type="tns:bookstype" maxOccurs="5" minOccurs="1"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="booktype">
+		<sequence>
+			<element name="bookName" type="string"></element>
+			<element name="bookName" type="string"></element>
+			<element name="authorName" type="string"></element>
+			<element name="publisher" type="string"></element>
+			<element name="price" type="tns:price"></element>
+			<element name="edition" type="string"></element>
+		</sequence>
+		<attribute name="id" type="ID" use="required"></attribute>
+	</complexType>
+
+	<element name="globalbooks" type="tns:bookstype"></element>
+	
+	<simpleType name="price">
+		<restriction base="integer">
+			<minInclusive value="10"></minInclusive>
+			<maxInclusive value="10000"></maxInclusive>
+		</restriction>
+	</simpleType>
+</schema>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <!DOCTYPE books SYSTEM "src/main/resources/booksType.dtd">-->
+
+<books> <!-- Root Element -->
+    <book id ="bk101" lang="English">
+        <bookName>XSLT Programmer's Reference</bookName> 
+        <authorName>Michael Kay</authorName>
+        <publisher>Wrox</publisher>
+        <price>400</price> 
+        <edition>4th</edition>         
+    </book> 
+    <book id ="bk102" lang="Tamil">
+        <bookName>Head First Java</bookName> 
+        <authorName>Kathy Sierra</authorName>
+        <publisher>O'reilly</publisher>
+        <price>200</price> 
+        <edition>1st</edition>         
+    </book>
+    <book id ="bk103">
+        <bookName>SQL The Complete Reference</bookName> 
+        <authorName>James R. Groff</authorName>
+        <publisher>McGraw-Hill</publisher>
+        <price>450</price> 
+        <edition>3rd</edition>         
+    </book>
+</books>
